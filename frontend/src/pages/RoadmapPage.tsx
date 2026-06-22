@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Target, Clock, TrendingUp, Download, Share2, RefreshCw,
@@ -229,6 +229,61 @@ export const RoadmapPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('Core Track');
 
+  // Drag-to-scroll & mouse wheel scroll states and handlers for Category row
+  const categoriesRef = useRef<HTMLDivElement>(null);
+  const isDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+  const hasMovedRef = useRef(false);
+
+  useEffect(() => {
+    const el = categoriesRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault();
+        el.scrollLeft += e.deltaY;
+      }
+    };
+
+    el.addEventListener('wheel', onWheel, { passive: false });
+    return () => el.removeEventListener('wheel', onWheel);
+  }, []);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    isDownRef.current = true;
+    startXRef.current = e.pageX - e.currentTarget.offsetLeft;
+    scrollLeftRef.current = e.currentTarget.scrollLeft;
+    hasMovedRef.current = false;
+    e.currentTarget.style.cursor = 'grabbing';
+  };
+
+  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+    isDownRef.current = false;
+    e.currentTarget.style.cursor = 'grab';
+  };
+
+  const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
+    isDownRef.current = false;
+    e.currentTarget.style.cursor = 'grab';
+    setTimeout(() => {
+      hasMovedRef.current = false;
+    }, 50);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDownRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - e.currentTarget.offsetLeft;
+    const walk = (x - startXRef.current) * 1.5;
+    e.currentTarget.scrollLeft = scrollLeftRef.current - walk;
+    
+    if (Math.abs(x - startXRef.current) > 5) {
+      hasMovedRef.current = true;
+    }
+  };
+
   const handleGenerate = async (role: string) => {
     setGenerating(true);
     setSelectedStep(null);
@@ -367,9 +422,23 @@ export const RoadmapPage: React.FC = () => {
           {/* Category Tabs */}
           <div className="flex flex-col gap-2 pt-3 border-t border-white/5">
             <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Categories:</span>
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+            <div 
+              ref={categoriesRef}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none select-none"
+              style={{ cursor: 'grab', userSelect: 'none' }}
+            >
               <button
-                onClick={() => setActiveCategory('All')}
+                onClick={(e) => {
+                  if (hasMovedRef.current) {
+                    e.preventDefault();
+                    return;
+                  }
+                  setActiveCategory('All');
+                }}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 shrink-0"
                 style={{
                   background: activeCategory === 'All'
@@ -385,7 +454,13 @@ export const RoadmapPage: React.FC = () => {
               {ROLE_CATEGORIES.map(cat => (
                 <button
                   key={cat.category}
-                  onClick={() => setActiveCategory(cat.category)}
+                  onClick={(e) => {
+                    if (hasMovedRef.current) {
+                      e.preventDefault();
+                      return;
+                    }
+                    setActiveCategory(cat.category);
+                  }}
                   className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 shrink-0"
                   style={{
                     background: activeCategory === cat.category
