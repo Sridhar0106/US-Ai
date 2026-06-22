@@ -22,6 +22,19 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
+// InterviewAI logo SVG mark matching the reference image
+const LogoMark: React.FC<{ size?: number }> = ({ size = 32 }) => (
+  <div
+    style={{ width: size, height: size }}
+    className="rounded-xl bg-gradient-to-br from-blue-500 via-violet-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-blue-500/30 shrink-0"
+  >
+    <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 18 18" fill="none">
+      <rect x="2" y="2" width="14" height="14" rx="3" stroke="white" strokeWidth="1.5" />
+      <path d="M6 9 L9 6 L12 9 L9 12 Z" fill="white" />
+    </svg>
+  </div>
+);
+
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
@@ -49,26 +62,25 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   const isActive = (path: string) => location.pathname === path;
+  const currentPage = menuItems.find(item => isActive(item.path))?.name || 'Dashboard';
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-darkBg dark:text-slate-100 flex transition-colors duration-300">
+    <div className="min-h-screen bg-darkBg text-slate-100 flex">
 
-      {/* SIDEBAR FOR DESKTOP */}
-      <aside className="hidden md:flex flex-col w-60 bg-white dark:bg-[#0d1117] border-r border-slate-200 dark:border-slate-800 sticky top-0 h-screen z-20">
+      {/* ===== DESKTOP SIDEBAR ===== */}
+      <aside className="hidden md:flex flex-col w-[220px] shrink-0 sticky top-0 h-screen z-20"
+        style={{ background: 'linear-gradient(180deg, #0d0f1a 0%, #0a0c15 100%)', borderRight: '1px solid #1a1f35' }}>
 
-        {/* LOGO */}
-        <div className="px-5 pt-5 pb-4 flex items-center gap-2.5 border-b border-slate-200 dark:border-slate-800">
-          {/* Logo mark */}
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-600 to-secondary-500 flex items-center justify-center shadow-lg shadow-primary-500/30">
-            <span className="text-white font-black text-sm">US</span>
-          </div>
-          <span className="text-lg font-extrabold tracking-tight bg-gradient-to-r from-primary-500 to-secondary-400 bg-clip-text text-transparent">
-            US Ai
+        {/* Logo */}
+        <div className="px-5 py-5 flex items-center gap-2.5" style={{ borderBottom: '1px solid #1a1f35' }}>
+          <LogoMark size={34} />
+          <span className="text-lg font-extrabold tracking-tight logo-text font-display">
+            InterviewAI
           </span>
         </div>
 
-        {/* NAVIGATION LINKS */}
-        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+        {/* Navigation */}
+        <nav className="flex-1 px-3 py-5 space-y-0.5 overflow-y-auto">
           {menuItems.map((item) => {
             if (item.role === 'admin' && user?.role !== 'admin') return null;
             const Icon = item.icon;
@@ -78,21 +90,28 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 ${
                   active
-                    ? 'bg-primary-600 text-white shadow-sm shadow-primary-500/20'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100'
+                    ? 'text-white shadow-sm'
+                    : 'text-slate-500 hover:text-slate-300'
                 }`}
+                style={active ? {
+                  background: 'linear-gradient(135deg, rgba(37,99,235,0.85) 0%, rgba(124,58,237,0.65) 100%)',
+                  boxShadow: '0 4px 14px rgba(37,99,235,0.25)',
+                } : {}}
               >
-                <Icon className={`h-4.5 w-4.5 shrink-0 ${active ? 'text-white' : 'text-slate-400 dark:text-slate-500'}`} style={{ width: '18px', height: '18px' }} />
+                <Icon
+                  style={{ width: '17px', height: '17px' }}
+                  className={active ? 'text-white' : 'text-slate-600'}
+                />
                 <span>{item.name}</span>
               </Link>
             );
           })}
         </nav>
 
-        {/* BOTTOM SECTION: Settings + Logout */}
-        <div className="px-3 pb-4 space-y-0.5 border-t border-slate-200 dark:border-slate-800 pt-3">
+        {/* Bottom: Settings + Logout */}
+        <div className="px-3 pb-5 pt-3 space-y-0.5" style={{ borderTop: '1px solid #1a1f35' }}>
           {bottomItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.path);
@@ -100,57 +119,65 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 ${
-                  active
-                    ? 'bg-primary-600 text-white'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60 hover:text-slate-900 dark:hover:text-slate-100'
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 ${
+                  active ? 'text-white' : 'text-slate-500 hover:text-slate-300'
                 }`}
+                style={active ? {
+                  background: 'linear-gradient(135deg, rgba(37,99,235,0.85) 0%, rgba(124,58,237,0.65) 100%)',
+                } : {}}
               >
-                <Icon style={{ width: '18px', height: '18px' }} className="shrink-0" />
+                <Icon style={{ width: '17px', height: '17px' }} className="shrink-0" />
                 <span>{item.name}</span>
               </Link>
             );
           })}
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm w-full text-slate-600 dark:text-slate-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 hover:text-rose-600 dark:hover:text-rose-400 transition-all duration-150"
+            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl font-medium text-sm w-full text-slate-500 hover:text-rose-400 transition-all duration-150 group"
+            style={{ transition: 'color 0.15s ease' }}
           >
-            <LogOut style={{ width: '18px', height: '18px' }} className="shrink-0" />
+            <LogOut style={{ width: '17px', height: '17px' }} className="shrink-0 group-hover:text-rose-400 transition-colors" />
             <span>Logout</span>
           </button>
         </div>
       </aside>
 
-      {/* MOBILE HEADER */}
-      <div className="flex flex-col flex-1 min-w-0">
-        <header className="md:hidden flex items-center justify-between px-6 py-4 bg-white dark:bg-[#0d1117] border-b border-slate-200 dark:border-slate-800 sticky top-0 z-30">
-          <div className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-primary-600 to-secondary-500 flex items-center justify-center">
-              <span className="text-white font-black text-xs">US</span>
-            </div>
-            <span className="text-base font-extrabold tracking-tight bg-gradient-to-r from-primary-500 to-secondary-400 bg-clip-text text-transparent">
-              US Ai
-            </span>
+      {/* ===== MAIN CONTENT AREA ===== */}
+      <div className="flex flex-col flex-1 min-w-0 min-h-screen">
+
+        {/* MOBILE HEADER */}
+        <header
+          className="md:hidden flex items-center justify-between px-5 py-4 sticky top-0 z-30"
+          style={{ background: '#0d0f1a', borderBottom: '1px solid #1a1f35' }}
+        >
+          <div className="flex items-center gap-2.5">
+            <LogoMark size={28} />
+            <span className="text-base font-extrabold tracking-tight logo-text font-display">InterviewAI</span>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition-all"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-200 transition-colors"
+              style={{ background: 'rgba(255,255,255,0.05)' }}
             >
-              {theme === 'dark' ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-indigo-600" />}
+              {theme === 'dark' ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-indigo-400" />}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-200 transition-colors"
+              style={{ background: 'rgba(255,255,255,0.05)' }}
             >
               {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </header>
 
-        {/* MOBILE MENU */}
+        {/* MOBILE MENU OVERLAY */}
         {mobileMenuOpen && (
-          <div className="md:hidden fixed inset-x-0 top-[65px] bottom-0 bg-white dark:bg-[#0d1117] border-b border-slate-200 dark:border-slate-800 z-25 flex flex-col p-5 animate-fade-in">
+          <div
+            className="md:hidden fixed inset-x-0 top-[61px] bottom-0 z-25 flex flex-col p-4 animate-fade-in"
+            style={{ background: '#0d0f1a', borderTop: '1px solid #1a1f35' }}
+          >
             <nav className="flex-1 space-y-1">
               {menuItems.map((item) => {
                 if (item.role === 'admin' && user?.role !== 'admin') return null;
@@ -162,55 +189,64 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     to={item.path}
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition-all ${
-                      active
-                        ? 'bg-primary-600 text-white'
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
+                      active ? 'text-white' : 'text-slate-500 hover:text-slate-300'
                     }`}
+                    style={active ? {
+                      background: 'linear-gradient(135deg, rgba(37,99,235,0.85) 0%, rgba(124,58,237,0.65) 100%)',
+                    } : {}}
                   >
-                    <Icon style={{ width: '18px', height: '18px' }} />
+                    <Icon style={{ width: '17px', height: '17px' }} />
                     <span>{item.name}</span>
                   </Link>
                 );
               })}
             </nav>
-            <div className="border-t border-slate-200 dark:border-slate-800 pt-4 mt-4 space-y-1">
+            <div className="pt-4 mt-4 space-y-1" style={{ borderTop: '1px solid #1a1f35' }}>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm w-full text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition-all"
+                className="flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm w-full text-rose-400 transition-all"
               >
-                <LogOut style={{ width: '18px', height: '18px' }} />
+                <LogOut style={{ width: '17px', height: '17px' }} />
                 <span>Logout</span>
               </button>
             </div>
           </div>
         )}
 
-        {/* TOP BAR FOR DESKTOP */}
-        <header className="hidden md:flex items-center justify-between px-8 py-3.5 sticky top-0 bg-white/80 dark:bg-[#0d1117]/80 backdrop-blur-md border-b border-slate-200/70 dark:border-slate-800/70 z-10">
-          <div>
-            <h2 className="text-base font-bold tracking-tight text-slate-800 dark:text-slate-100">
-              {menuItems.find(item => isActive(item.path))?.name || 'Dashboard'}
-            </h2>
-          </div>
+        {/* DESKTOP TOP BAR */}
+        <header
+          className="hidden md:flex items-center justify-between px-8 py-3 sticky top-0 z-10"
+          style={{ background: 'rgba(9,10,15,0.85)', backdropFilter: 'blur(12px)', borderBottom: '1px solid #1a1f35' }}
+        >
+          <h2 className="text-sm font-bold text-slate-300 tracking-wide">
+            {currentPage}
+          </h2>
           <div className="flex items-center gap-3">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:scale-105 active:scale-95 transition-all"
+              className="p-2 rounded-xl text-slate-400 hover:text-slate-200 transition-all hover:scale-105 active:scale-95"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.07)' }}
             >
-              {theme === 'dark' ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-indigo-600" />}
+              {theme === 'dark' ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-indigo-400" />}
             </button>
-            <div className="h-7 w-px bg-slate-200 dark:bg-slate-700" />
-            <img
-              src={user?.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${user?.name}`}
-              alt={user?.name}
-              className="h-8 w-8 rounded-full border border-slate-300 dark:border-slate-600 bg-slate-200 dark:bg-slate-800"
-            />
+            <div className="h-5 w-px" style={{ background: '#1f2538' }} />
+            {/* User Avatar */}
+            <div className="flex items-center gap-2.5">
+              <img
+                src={user?.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${user?.name || 'user'}`}
+                alt={user?.name || 'User'}
+                className="h-8 w-8 rounded-full object-cover"
+                style={{ border: '2px solid #1f2538', background: '#1a1f35' }}
+              />
+            </div>
           </div>
         </header>
 
-        {/* MAIN PAGE CONTAINER */}
-        <main className="flex-1 p-6 md:p-8 overflow-y-auto max-w-7xl w-full mx-auto">
-          {children}
+        {/* PAGE CONTENT */}
+        <main className="flex-1 p-6 md:p-8 overflow-y-auto">
+          <div className="max-w-7xl mx-auto animate-fade-in">
+            {children}
+          </div>
         </main>
       </div>
     </div>

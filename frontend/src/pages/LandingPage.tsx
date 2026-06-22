@@ -159,7 +159,7 @@ export const LandingPage: React.FC = () => {
   ];
 
   return (
-    <div className="bg-[#030712] text-slate-100 font-sans min-h-screen overflow-x-hidden selection:bg-primary-500/30">
+    <div className="bg-[#060813] text-slate-100 font-sans min-h-screen overflow-x-hidden selection:bg-primary-500/30">
       
       {/* BACKGROUND ELEMENTS */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(124,58,237,0.12),transparent_50%)] z-0" />
@@ -168,26 +168,32 @@ export const LandingPage: React.FC = () => {
 
       {/* HEADER NAVBAR */}
       <header className="relative z-10 max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <BrainCircuit className="h-8 w-8 text-accent-500 animate-float" />
-          <span className="text-2xl font-black bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent tracking-tight">
-            US Ai
+        <div className="flex items-center gap-2.5">
+          {/* InterviewAI Logo Mark */}
+          <div className="w-9 h-9 rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30" style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4)' }}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="2" y="2" width="14" height="14" rx="3" stroke="white" strokeWidth="1.5" />
+              <path d="M6 9 L9 6 L12 9 L9 12 Z" fill="white" />
+            </svg>
+          </div>
+          <span className="text-2xl font-black tracking-tight" style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+            InterviewAI
           </span>
         </div>
-        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-400">
-          <a href="#features" className="hover:text-white transition-colors">Features</a>
-          <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
-          <a href="#testimonials" className="hover:text-white transition-colors">Reviews</a>
-          <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
-          <a href="#faq" className="hover:text-white transition-colors">FAQs</a>
+        <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-500">
+          <a href="#features" className="hover:text-slate-200 transition-colors">Features</a>
+          <a href="#how-it-works" className="hover:text-slate-200 transition-colors">How It Works</a>
+          <a href="#testimonials" className="hover:text-slate-200 transition-colors">Testimonials</a>
+          <a href="#faq" className="hover:text-slate-200 transition-colors">FAQ</a>
         </nav>
-        <div className="flex items-center gap-4">
-          <Link to="/login" className="text-sm font-bold text-slate-300 hover:text-white transition-colors px-4 py-2">
-            Log In
+        <div className="flex items-center gap-3">
+          <Link to="/login" className="text-sm font-semibold text-slate-400 hover:text-slate-200 transition-colors px-3 py-2">
+            Sign in
           </Link>
           <Link 
             to="/register" 
-            className="text-sm font-bold bg-white text-[#030712] hover:bg-slate-200 px-5 py-2.5 rounded-xl transition-all duration-200 shadow-lg shadow-white/5"
+            className="text-sm font-bold px-5 py-2.5 rounded-xl transition-all duration-200 text-white"
+            style={{ background: 'linear-gradient(135deg, #2563eb, #7c3aed)', boxShadow: '0 4px 15px rgba(37,99,235,0.3)' }}
           >
             Get Started
           </Link>
@@ -224,43 +230,69 @@ export const LandingPage: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20">
             <Link 
               to="/register" 
-              className="w-full sm:w-auto flex items-center justify-center gap-2 bg-gradient-to-r from-primary-600 to-secondary-500 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-primary-500/20 hover:scale-[1.02] transition-all group"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 text-white font-bold px-8 py-4 rounded-xl transition-all group hover:scale-[1.02]"
+              style={{ background: 'linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)', boxShadow: '0 6px 24px rgba(37,99,235,0.35)' }}
             >
               <span>Start Free Interview</span>
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <button 
               onClick={() => setShowDemoVideo(true)}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 border border-slate-800 bg-slate-900/50 hover:bg-slate-900 text-slate-200 font-bold px-8 py-4 rounded-xl transition-all"
+              className="w-full sm:w-auto flex items-center justify-center gap-2 text-slate-200 font-bold px-8 py-4 rounded-xl transition-all hover:scale-[1.01]"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', backdropFilter: 'blur(8px)' }}
             >
-              <Play className="h-4 w-4 text-accent-400 fill-accent-400" />
-              <span>Watch 1-Min Demo</span>
+              <Play className="h-4 w-4 fill-cyan-400 text-cyan-400" />
+              <span>Watch Demo</span>
             </button>
           </div>
         </motion.div>
 
-        {/* INTERACTION PREVIEW MOCKUP */}
+        {/* INTERACTION PREVIEW MOCKUP — dark glassmorphism card */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative max-w-5xl mx-auto p-2.5 rounded-2xl border border-slate-800 bg-slate-950/70 shadow-2xl shadow-primary-500/5"
+          className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden"
+          style={{ background: 'rgba(13,15,26,0.9)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 40px 100px rgba(0,0,0,0.5)' }}
         >
-          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent z-10" />
-          <div className="flex items-center justify-between px-4 py-3 border-b border-slate-900">
+          {/* Mock window bar */}
+          <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
             <div className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full bg-rose-500/80" />
-              <span className="w-3 h-3 rounded-full bg-amber-500/80" />
-              <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
+              <span className="w-3 h-3 rounded-full" style={{ background: '#ff5f57' }} />
+              <span className="w-3 h-3 rounded-full" style={{ background: '#febc2e' }} />
+              <span className="w-3 h-3 rounded-full" style={{ background: '#28c840' }} />
             </div>
-            <div className="text-xs font-semibold text-slate-600">AI Interview Workspace - Frontend Engineer</div>
-            <div className="w-12" />
+            <div className="text-xs font-semibold" style={{ color: '#374151' }}>AI Interview Workspace — Frontend Engineer</div>
+            <div className="w-16" />
           </div>
-          <img 
-            src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&q=80" 
-            alt="Product Mockup Dashboard" 
-            className="w-full h-[320px] md:h-[450px] object-cover rounded-xl opacity-80"
-          />
+          {/* Mock content — dark interview room preview */}
+          <div className="w-full h-[280px] md:h-[420px] flex items-center justify-center relative overflow-hidden"
+            style={{ background: 'linear-gradient(135deg, #0a0c18 0%, #0d0f22 50%, #0b1020 100%)' }}>
+            {/* Glow orbs */}
+            <div className="absolute top-10 left-10 w-64 h-64 rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(#3b82f6, transparent)' }} />
+            <div className="absolute bottom-5 right-10 w-48 h-48 rounded-full blur-3xl opacity-15" style={{ background: 'radial-gradient(#8b5cf6, transparent)' }} />
+            {/* AI Bot icon */}
+            <div className="flex flex-col items-center gap-4 relative z-10">
+              <div className="w-20 h-20 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(37,99,235,0.3), rgba(124,58,237,0.3))', border: '1px solid rgba(99,102,241,0.3)' }}>
+                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+                  <circle cx="18" cy="12" r="8" stroke="#818cf8" strokeWidth="1.5" />
+                  <path d="M8 30c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#818cf8" strokeWidth="1.5" strokeLinecap="round" />
+                  <circle cx="14" cy="11" r="1.5" fill="#22d3ee" />
+                  <circle cx="22" cy="11" r="1.5" fill="#22d3ee" />
+                </svg>
+              </div>
+              <div className="text-center">
+                <p className="text-sm font-semibold text-slate-300">Question 4 of 10</p>
+                <p className="text-xs mt-1" style={{ color: '#4b5563' }}>"Explain the concept of Virtual DOM in React. What are its advantages?"</p>
+              </div>
+              {/* Waveform bars */}
+              <div className="flex items-end gap-1 h-8">
+                {[4,7,12,8,14,6,10,15,9,13,7,11,5,8,12].map((h, i) => (
+                  <div key={i} className="w-1.5 rounded-full" style={{ height: `${h}px`, background: `rgba(99,102,241,${0.3 + (i % 3) * 0.2})` }} />
+                ))}
+              </div>
+            </div>
+          </div>
         </motion.div>
       </section>
 
@@ -360,67 +392,6 @@ export const LandingPage: React.FC = () => {
         </div>
       </section>
 
-      {/* PRICING SECTION */}
-      <section id="pricing" className="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-slate-900 bg-slate-950/10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Flexible Plans for Career Builders</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            Choose a plan that fits your current requirements. Upgrade or cancel subscription at any time.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto items-stretch">
-          {pricingPlans.map((plan, idx) => (
-            <div 
-              key={idx}
-              className={`p-8 rounded-2xl border flex flex-col justify-between relative transition-all ${
-                plan.popular 
-                  ? 'border-primary-500 bg-gradient-to-b from-[#080d21] to-[#040611] shadow-xl shadow-primary-500/5 ring-1 ring-primary-500' 
-                  : 'border-slate-900 bg-slate-950/60'
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute top-0 right-6 -translate-y-1/2 bg-gradient-to-r from-primary-600 to-secondary-500 text-white text-[10px] font-extrabold uppercase px-3 py-1 rounded-full tracking-wider shadow">
-                  Most Popular
-                </div>
-              )}
-              <div>
-                <h3 className="text-lg font-bold text-slate-300 mb-2">{plan.name}</h3>
-                <div className="flex items-baseline gap-1 mb-4">
-                  <span className="text-4xl font-extrabold text-white">{plan.price}</span>
-                  {plan.period && <span className="text-slate-400 text-sm">{plan.period}</span>}
-                </div>
-                <p className="text-xs text-slate-400 mb-6 leading-relaxed">{plan.description}</p>
-                <div className="h-px bg-slate-900 w-full mb-6" />
-                <ul className="space-y-3 mb-8">
-                  {plan.features.map((feat, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-xs text-slate-300">
-                      <CheckCircle2 className="h-4 w-4 text-accent-400 shrink-0" />
-                      <span>{feat}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <Link
-                to={plan.link.startsWith('http') || plan.link.startsWith('mailto') ? '#' : plan.link}
-                onClick={(e) => {
-                  if (plan.link.startsWith('mailto')) {
-                    window.location.href = plan.link;
-                    e.preventDefault();
-                  }
-                }}
-                className={`w-full py-3 rounded-xl font-semibold text-center text-sm transition-all duration-200 ${
-                  plan.popular
-                    ? 'bg-gradient-to-r from-primary-600 to-secondary-500 text-white hover:opacity-95 shadow-md'
-                    : 'bg-slate-900 border border-slate-800 text-slate-200 hover:bg-slate-800'
-                }`}
-              >
-                {plan.cta}
-              </Link>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* FAQ SECTION */}
       <section id="faq" className="relative z-10 max-w-4xl mx-auto px-6 py-24 border-t border-slate-900">
@@ -485,9 +456,14 @@ export const LandingPage: React.FC = () => {
       {/* FOOTER */}
       <footer className="relative z-10 border-t border-slate-950 bg-[#010309] py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-3">
-            <BrainCircuit className="h-7 w-7 text-accent-500" />
-            <span className="text-xl font-black text-white tracking-tight">US Ai</span>
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}>
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none">
+                <rect x="2" y="2" width="14" height="14" rx="3" stroke="white" strokeWidth="1.5" />
+                <path d="M6 9 L9 6 L12 9 L9 12 Z" fill="white" />
+              </svg>
+            </div>
+            <span className="text-xl font-black text-white tracking-tight">InterviewAI</span>
           </div>
           <p className="text-xs text-slate-600">
             &copy; {new Date().getFullYear()} US Ai Inc. All rights reserved. Designed for elite preparation.

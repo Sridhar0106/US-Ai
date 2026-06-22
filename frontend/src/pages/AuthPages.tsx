@@ -85,7 +85,7 @@ export const AuthPages: React.FC<AuthPagesProps> = ({ mode }) => {
           <Link to="/" className="flex items-center gap-2.5 mb-2">
             <BrainCircuit className="h-9 w-9 text-accent-500 animate-float" />
             <span className="text-2xl font-black bg-gradient-to-r from-primary-500 via-secondary-500 to-accent-500 bg-clip-text text-transparent tracking-tight">
-              US Ai
+              InterviewAI
             </span>
           </Link>
           <p className="text-xs text-slate-500 font-medium tracking-wide">
