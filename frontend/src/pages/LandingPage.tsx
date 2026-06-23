@@ -115,30 +115,6 @@ export const LandingPage: React.FC = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah Jenkins",
-      role: "Incoming Frontend Engineer at Vercel",
-      text: "The follow-up question engine of US Ai was scarily accurate. It asked me questions on React hook closures that prepared me perfectly for my actual interview loop.",
-      rating: 5,
-      avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150"
-    },
-    {
-      name: "David Chen",
-      role: "Backend Architect at Stripe",
-      text: "As someone who hadn't interviewed in 5 years, the grading system identified that I was talking too fast and not explaining scaling trade-offs. 10/10 recommend.",
-      rating: 5,
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
-    },
-    {
-      name: "Elena Rostova",
-      role: "Data Scientist at Perplexity",
-      text: "The resume analyzer pointed out that I lacked specific SQL queries optimizations in my profile. I rewrote it, ran the roadmap tasks, and cleared the screening!",
-      rating: 5,
-      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150"
-    }
-  ];
-
   const faqs = [
     {
       question: "How does the AI generate questions?",
@@ -183,7 +159,6 @@ export const LandingPage: React.FC = () => {
         <nav className="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-500">
           <a href="#features" className="hover:text-slate-200 transition-colors">Features</a>
           <a href="#how-it-works" className="hover:text-slate-200 transition-colors">How It Works</a>
-          <a href="#testimonials" className="hover:text-slate-200 transition-colors">Testimonials</a>
           <a href="#faq" className="hover:text-slate-200 transition-colors">FAQ</a>
         </nav>
         <div className="flex items-center gap-3">
@@ -359,36 +334,6 @@ export const LandingPage: React.FC = () => {
               View dynamic metrics charts, download detailed PDF review sheets, and follow structured roadmaps with external tutorials for weak elements.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section id="testimonials" className="relative z-10 max-w-7xl mx-auto px-6 py-24 border-t border-slate-900">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Voted Best Prep Tool by Successes</h2>
-          <p className="text-slate-400 max-w-2xl mx-auto">
-            See how developers cracked loops at top tech giants after practicing on US Ai.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((t, idx) => (
-            <div key={idx} className="p-8 rounded-2xl border border-slate-900 bg-slate-950/40 flex flex-col justify-between">
-              <div>
-                <div className="flex gap-1 mb-4 text-amber-400">
-                  {[...Array(t.rating)].map((_, i) => <Star key={i} className="h-4.5 w-4.5 fill-amber-400" />)}
-                </div>
-                <p className="text-slate-300 text-sm leading-relaxed italic mb-6">"{t.text}"</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <img src={t.avatar} alt={t.name} className="w-10 h-10 rounded-full object-cover" />
-                <div>
-                  <h4 className="font-semibold text-sm text-slate-100">{t.name}</h4>
-                  <p className="text-xs text-slate-500">{t.role}</p>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
