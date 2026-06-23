@@ -164,52 +164,19 @@ export const LandingPage: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* INTERACTION PREVIEW MOCKUP — dark glassmorphism card */}
+        {/* INTERACTION PREVIEW MOCKUP — premium image */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden"
+          className="relative max-w-5xl mx-auto rounded-2xl overflow-hidden group/mockup"
           style={{ background: 'rgba(13,15,26,0.9)', border: '1px solid rgba(255,255,255,0.07)', boxShadow: '0 40px 100px rgba(0,0,0,0.5)' }}
         >
-          {/* Mock window bar */}
-          <div className="flex items-center justify-between px-4 py-3" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(255,255,255,0.02)' }}>
-            <div className="flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full" style={{ background: '#ff5f57' }} />
-              <span className="w-3 h-3 rounded-full" style={{ background: '#febc2e' }} />
-              <span className="w-3 h-3 rounded-full" style={{ background: '#28c840' }} />
-            </div>
-            <div className="text-xs font-semibold" style={{ color: '#374151' }}>AI Interview Workspace — Frontend Engineer</div>
-            <div className="w-16" />
-          </div>
-          {/* Mock content — dark interview room preview */}
-          <div className="w-full h-[280px] md:h-[420px] flex items-center justify-center relative overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, #0a0c18 0%, #0d0f22 50%, #0b1020 100%)' }}>
-            {/* Glow orbs */}
-            <div className="absolute top-10 left-10 w-64 h-64 rounded-full blur-3xl opacity-20" style={{ background: 'radial-gradient(#3b82f6, transparent)' }} />
-            <div className="absolute bottom-5 right-10 w-48 h-48 rounded-full blur-3xl opacity-15" style={{ background: 'radial-gradient(#8b5cf6, transparent)' }} />
-            {/* AI Bot icon */}
-            <div className="flex flex-col items-center gap-4 relative z-10">
-              <div className="w-20 h-20 rounded-2xl flex items-center justify-center" style={{ background: 'linear-gradient(135deg, rgba(37,99,235,0.3), rgba(124,58,237,0.3))', border: '1px solid rgba(99,102,241,0.3)' }}>
-                <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                  <circle cx="18" cy="12" r="8" stroke="#818cf8" strokeWidth="1.5" />
-                  <path d="M8 30c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#818cf8" strokeWidth="1.5" strokeLinecap="round" />
-                  <circle cx="14" cy="11" r="1.5" fill="#22d3ee" />
-                  <circle cx="22" cy="11" r="1.5" fill="#22d3ee" />
-                </svg>
-              </div>
-              <div className="text-center">
-                <p className="text-sm font-semibold text-slate-300">Question 4 of 10</p>
-                <p className="text-xs mt-1" style={{ color: '#4b5563' }}>"Explain the concept of Virtual DOM in React. What are its advantages?"</p>
-              </div>
-              {/* Waveform bars */}
-              <div className="flex items-end gap-1 h-8">
-                {[4,7,12,8,14,6,10,15,9,13,7,11,5,8,12].map((h, i) => (
-                  <div key={i} className="w-1.5 rounded-full" style={{ height: `${h}px`, background: `rgba(99,102,241,${0.3 + (i % 3) * 0.2})` }} />
-                ))}
-              </div>
-            </div>
-          </div>
+          <img 
+            src="/interview_preview.png" 
+            alt="AI Interview Room Preview" 
+            className="w-full h-auto object-cover transition-transform duration-700 group-hover/mockup:scale-[1.015]"
+          />
         </motion.div>
       </section>
 

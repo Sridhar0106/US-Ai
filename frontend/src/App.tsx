@@ -54,7 +54,7 @@ export const App: React.FC = () => {
             <Route path="/dashboard" element={<LayoutWrapper><Dashboard /></LayoutWrapper>} />
             <Route path="/roles" element={<LayoutWrapper><RoleSelection /></LayoutWrapper>} />
             <Route path="/resume" element={<LayoutWrapper><ResumeAnalyzer /></LayoutWrapper>} />
-            <Route path="/interview/:id" element={<LayoutWrapper><InterviewRoom /></LayoutWrapper>} />
+            <Route path="/interview/:id" element={<PrivateRoute><InterviewRoom /></PrivateRoute>} />
             <Route path="/report/:id" element={<LayoutWrapper><ReportPage /></LayoutWrapper>} />
             <Route path="/roadmap" element={<LayoutWrapper><RoadmapPage /></LayoutWrapper>} />
             <Route path="/analytics" element={<LayoutWrapper><AnalyticsPage /></LayoutWrapper>} />
