@@ -5,13 +5,10 @@ import {
   BrainCircuit, 
   ArrowRight, 
   Play, 
-  CheckCircle2, 
-  Sparkles, 
   MessageSquare, 
   TrendingUp, 
   ShieldCheck, 
   Bookmark, 
-  Star,
   Layers,
   ChevronDown,
   X
@@ -62,56 +59,6 @@ export const LandingPage: React.FC = () => {
       description: "Organize templates, audit mock sessions, and track aggregate student improvements dynamically.",
       icon: ShieldCheck,
       color: "from-indigo-500 to-blue-500"
-    }
-  ];
-
-  const pricingPlans = [
-    {
-      name: "Starter",
-      price: "$0",
-      description: "Perfect for exploring the platform features.",
-      features: [
-        "1 Comprehensive Mock Interview",
-        "Basic Resume Score Check",
-        "Standard Question Recommendations",
-        "Limited Dashboard Statistics"
-      ],
-      cta: "Get Started",
-      popular: false,
-      link: "/register"
-    },
-    {
-      name: "Pro Professional",
-      price: "$19",
-      period: "/mo",
-      description: "Accelerate your prep and land the dream job.",
-      features: [
-        "Unlimited Mock Interviews",
-        "Full AI Resume Analyzer",
-        "Dynamic Follow-Up Questions",
-        "Personalized Learning Roadmaps",
-        "Downloadable PDF Reports",
-        "Priority Support"
-      ],
-      cta: "Unlock Pro",
-      popular: true,
-      link: "/register"
-    },
-    {
-      name: "Enterprise",
-      price: "Custom",
-      description: "For universities, coding bootcamps, and teams.",
-      features: [
-        "Everything in Pro Plan",
-        "Team Dashboard Analytics",
-        "Custom Role & Template Creation",
-        "API Integrations",
-        "Dedicated Success Manager",
-        "SLA Support"
-      ],
-      cta: "Contact Sales",
-      popular: false,
-      link: "mailto:sales@usai.com"
     }
   ];
 
@@ -182,11 +129,6 @@ export const LandingPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-primary-500/20 bg-primary-950/20 text-accent-400 text-xs font-semibold mb-6">
-            <Sparkles className="h-3.5 w-3.5 animate-pulse" />
-            <span>Next-Gen Gemini 2.5 Mock Framework is Live</span>
-          </div>
 
           {/* Headline */}
           <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight max-w-4xl mx-auto leading-[1.1] mb-6">

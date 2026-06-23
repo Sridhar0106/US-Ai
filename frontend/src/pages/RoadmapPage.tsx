@@ -3,19 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Target, Clock, TrendingUp, Download, Share2, RefreshCw,
   CheckCircle2, Lock, PlayCircle, Circle, ChevronRight,
-  BookOpen, Video, FileText, Code2, Award, Star,
-  ExternalLink, Plus, StickyNote, BarChart3, Map,
-  Zap, Trophy, ArrowRight, X, ChevronDown, Pencil,
-  GraduationCap, Sparkles, Loader2, Search
+  BookOpen, FileText, Code2, Award, Star,
+  ExternalLink, BarChart3, Map,
+  Zap, Trophy, X,
+  GraduationCap, Sparkles, Search
 } from 'lucide-react';
 import {
   buildRoadmap,
   ROLE_CATEGORIES,
-  ROLES,
   ytUrl
 } from '../data/roadmapData';
 import type {
-  RoleCategory,
   RoleRoadmap,
   RoadmapStep,
   StepStatus,

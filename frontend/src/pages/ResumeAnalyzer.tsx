@@ -3,10 +3,9 @@ import api from '../services/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Upload, FileText, RefreshCw, CheckCircle2, AlertCircle,
-  ArrowRight, Cpu, Sparkles, Send, MessageSquare, X,
+  ArrowRight, Cpu, Sparkles, Send, MessageSquare,
   ChevronRight, Zap, Target, BookOpen, Briefcase, Award,
-  TrendingUp, Code2, Server, Database, Wrench, GraduationCap,
-  RotateCcw, Clock, Layers
+  TrendingUp, Code2, GraduationCap, Clock, Layers
 } from 'lucide-react';
 
 /* ─── Types ──────────────────────────────────────────────── */
@@ -293,7 +292,7 @@ export const ResumeAnalyzer: React.FC = () => {
   const [uploading, setUploading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
-  const [justAnalyzed, setJustAnalyzed] = useState(false);
+
 
   /* chat */
   const [chatInput, setChatInput] = useState('');
@@ -361,7 +360,6 @@ export const ResumeAnalyzer: React.FC = () => {
       const newScan = data.resume;
       setScans(prev => [newScan, ...prev]);
       setSelectedScan(newScan);
-      setJustAnalyzed(true);
       setChatHistory([]); // fresh chat for new resume
       setFile(null);
       setFileSize(0);
@@ -374,10 +372,8 @@ export const ResumeAnalyzer: React.FC = () => {
     }
   };
 
-  /* re-analyze */
   const handleReAnalyze = () => {
     setSelectedScan(null);
-    setJustAnalyzed(false);
     setFile(null);
     setFileSize(0);
     setError(null);
@@ -783,7 +779,7 @@ export const ResumeAnalyzer: React.FC = () => {
                 <div className="space-y-2 max-h-[260px] overflow-y-auto pr-1" style={{ scrollbarWidth: 'thin' }}>
                   {scans.map(scan => (
                     <button key={scan._id}
-                      onClick={() => { setSelectedScan(scan); setJustAnalyzed(false); }}
+                      onClick={() => { setSelectedScan(scan); }}
                       className="w-full flex items-center gap-3 p-3 rounded-xl transition-all text-left"
                       style={{
                         background: selectedScan?._id === scan._id ? 'rgba(109,74,255,0.12)' : 'rgba(255,255,255,0.02)',
